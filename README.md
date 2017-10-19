@@ -5,7 +5,7 @@
 
 ---
 
-This is a very thin layer around the prop-types package, to add introspection support, by setting a field called ´introspection´ on all created propTypes. This only handles the ´prop-types´ package. If you are using other packages (like ´react-immutable-proptypes´), those must also be replaced.
+This is a very thin layer around the prop-types package, to add introspection support, by setting a field called `introspection` on all created propTypes. This only handles the `prop-types` package. If you are using other packages (like `react-immutable-proptypes`), those must also be replaced.
 
 ## Usage
 
