@@ -1,0 +1,19 @@
+{
+  "name": "introspectable-proptypes",
+  "version": "15.6.0",
+  "description": "Hacky propTypes introspection wrapper",
+  "main": "index.js",
+  "repository": "https://github.com/dossiersolutions/introspectable-proptypes",
+  "author": "Jostein Berre Eliassen",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}
