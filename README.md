@@ -9,7 +9,7 @@ This is a very thin layer around the prop-types package, to add introspection su
 
 ## Usage
 
-1. Add as dependency: `yarn add introspectable-proptypes` or `npm install instrospectable-proptypes`
+1. Add as dependency: `yarn add introspectable-proptypes` or `npm install introspectable-proptypes`
 2. Import component: `import PropTypes from "introspectable-proptypes";`
 3. Use as before.
 4. Introspect: `MyComponent.propTypes.introspection` now contains a readable version of the propType.
