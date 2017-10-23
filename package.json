@@ -1,6 +1,6 @@
 {
   "name": "introspectable-proptypes",
-  "version": "15.6.0",
+  "version": "15.6.1",
   "description": "Hacky propTypes introspection wrapper",
   "main": "index.js",
   "repository": "https://github.com/dossiersolutions/introspectable-proptypes",
