@@ -1,30 +1,41 @@
-var PropTypes = require("prop-types");
 
 module.exports = {};
 
-"array bool func number object string symbol any element node".split(" ")
-  .forEach((kind) => {
-    const result = PropTypes[kind];
-    result.introspection = {kind: kind};
-    result.isRequired.introspection = {kind: kind, isRequired: true};
-    module.exports[kind] = result;
-  });
+var PropTypes = require("prop-types"),
+    nonParametricChecks = "array bool func number object string symbol any element node".split(" "),
+    parametricChecks = "arrayOf instanceOf objectOf oneOf oneOfType shape exact".split(" "),
+    i, kind;
 
-"arrayOf instanceOf objectOf oneOf oneOfType shape exact".split(" ")
-  .forEach((kind) => {
-    module.exports[kind] = function createParametricTypeCheckerWithIntrospection(arg) {
+for (i=0; i<nonParametricChecks.length; i++)
+{
+  kind = nonParametricChecks[i];
 
-      const result = PropTypes[kind].apply(this, arguments);
+  var modifiedChecker = PropTypes[kind];
+  modifiedChecker.introspection = {kind: kind};
+  modifiedChecker.isRequired.introspection = {kind: kind, isRequired: true};
 
-      if (Array.isArray(arg)) arg = arg.map((v) => v.introspection || v);
-      else if (arg.instrospection) arg = arg.instrospection;
+  module.exports[kind] = modifiedChecker;
+}
 
-      result.introspection = {kind: kind, arg: arg};
-      if (result.isRequired) result.isRequired.introspection = {
-        kind: kind,
-        arg: arg,
-        isRequired: true
-      };
-      return result;
+
+for (i=0; i<parametricChecks.length; i++)
+{
+  kind = parametricChecks[i];
+
+  module.exports[kind] = function createParametricTypeCheckerWithIntrospection(arg) {
+    var result = PropTypes[kind].apply(this, arguments);
+
+    if (Array.isArray(arg)) arg = arg.map(function (v) { return v.introspection || v; });
+    else if (arg.instrospection) arg = arg.instrospection;
+
+    result.introspection = {kind: kind, arg: arg};
+
+    if (result.isRequired) result.isRequired.introspection = {
+      kind: kind,
+      arg: arg,
+      isRequired: true
     };
-  });
+
+    return result;
+  };
+}
