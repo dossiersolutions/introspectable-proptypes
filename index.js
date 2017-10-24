@@ -17,12 +17,10 @@ for (i=0; i<nonParametricChecks.length; i++)
   module.exports[kind] = modifiedChecker;
 }
 
+function wrapCreateTypeCheckerWithIntrospection(kind) {
 
-for (i=0; i<parametricChecks.length; i++)
-{
-  kind = parametricChecks[i];
+  return function createIntrospectableTypeChecker (arg) {
 
-  module.exports[kind] = function createParametricTypeCheckerWithIntrospection(arg) {
     var result = PropTypes[kind].apply(this, arguments);
 
     if (Array.isArray(arg)) arg = arg.map(function (v) { return v.introspection || v; });
@@ -38,4 +36,11 @@ for (i=0; i<parametricChecks.length; i++)
 
     return result;
   };
+}
+
+for (i=0; i<parametricChecks.length; i++)
+{
+  kind = parametricChecks[i];
+
+  module.exports[kind] = wrapCreateTypeCheckerWithIntrospection(kind);
 }
