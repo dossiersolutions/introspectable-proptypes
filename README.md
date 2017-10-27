@@ -13,3 +13,7 @@ This is a very thin layer around the prop-types package, to add introspection su
 2. Import component: `import PropTypes from "introspectable-proptypes";`
 3. Use as before.
 4. Introspect: `MyComponent.propTypes.introspection` now contains a readable version of the propType.
+
+## Versioning
+
+Major and minor version numbers match the prop-types version they wrap. Patch numbers are independent from prop-types. We try to always use the latest available patch version when making new releases.
